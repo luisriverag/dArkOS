@@ -137,6 +137,18 @@ source ./fetch_compat_libs.sh
 
 # Various tools available through Options added here
 sudo mkdir -p Arkbuild/opt/system/Advanced
+sudo mkdir -p Arkbuild/opt/vulkan
+sudo cp misc/rk3566/vulkan/libmali.so.1.9.0 Arkbuild/opt/vulkan/libmali.so
+sudo cp misc/rk3566/vulkan/rk_vk.json Arkbuild/usr/share/vulkan/icd.d/rk_vk.json
+sudo cp -f misc/rk3566/vulkan/libvulkan.so.1.3.274 Arkbuild/usr/lib/aarch64-linux-gnu/.
+sudo cp -f misc/rk3566/vulkan/libmali-hook.so.1.9.0 Arkbuild/usr/lib/aarch64-linux-gnu/.
+sudo chroot Arkbuild/ bash -c "ln -sf /usr/lib/aarch64-linux-gnu/libmali-hook.so.1.9.0 /usr/lib/aarch64-linux-gnu/libmali-hook.so.1"
+sudo chroot Arkbuild/ bash -c "ln -sf /usr/lib/aarch64-linux-gnu/libmali-hook.so.1 /usr/lib/aarch64-linux-gnu/libmali-hook.so"
+sudo chroot Arkbuild/ bash -c "rm -f /usr/lib/aarch64-linux-gnu/libvulkan.so.1 /usr/lib/aarch64-linux-gnu/libvulkan.so"
+sudo chroot Arkbuild/ bash -c "ln -sf /usr/lib/aarch64-linux-gnu/libvulkan.so.1.3.274 /usr/lib/aarch64-linux-gnu/libvulkan.so.1"
+sudo chroot Arkbuild/ bash -c "find /usr/lib/aarch64-linux-gnu -type f -name 'libvulkan.so*' -not -name 'libvulkan.so.1.3.274' -delete"
+sudo chroot Arkbuild/ bash -c "ln -sf /usr/lib/aarch64-linux-gnu/libvulkan.so.1 /usr/lib/aarch64-linux-gnu/libvulkan.so"
+sudo chown -R ark:ark Arkbuild/opt/vulkan/
 sudo cp dArkOS_Tools/*.sh Arkbuild/opt/system/
 sudo cp dArkOS_Tools/${CHIPSET}/*.sh Arkbuild/opt/system/Advanced/
 sudo cp dArkOS_Tools/${CHIPSET}/"Enable Low Battery Warning".sh Arkbuild/usr/local/bin/
