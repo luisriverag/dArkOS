@@ -31,6 +31,7 @@ call_chroot "apt remove -y autotools-dev \
   libfreetype-dev \
   libfribidi-dev \
   libglew-dev \
+  libglfw3-dev \
   libjpeg62-turbo-dev \
   libluajit-5.1-dev \
   libmad0-dev \
@@ -48,6 +49,7 @@ call_chroot "apt remove -y autotools-dev \
   libsdl2-image-dev \
   libsdl2-mixer-dev \
   libsdl2-ttf-dev \
+  libshaderc-dev \
   libslirp-dev \
   libsm-dev \
   libsoxr-dev \

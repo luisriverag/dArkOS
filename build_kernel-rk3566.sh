@@ -151,7 +151,7 @@ cp ../resource.img rk3566_tool/Image/
 # More information on how it was obtained is available from
 # here: https://github.com/christianhaitian/rkbin/commit/1302e7af2b34f18496997f52e3cf5a358829db73
 cp ../rkbin/bin/rk35/Anbernic_Stock_loader1.img .
-sudo cp uboot.img ../../Arkbuild/usr/local/bin/uboot.img.jelos
+#sudo cp uboot.img ../../Arkbuild/usr/local/bin/uboot.img.jelos
 
 echo "Flashing loader1.img, trust.img, uboot.img and resource.img..."
 sudo dd if=Anbernic_Stock_loader1.img of=$LOOP_DEV bs=$SECTOR_SIZE seek=64 conv=notrunc

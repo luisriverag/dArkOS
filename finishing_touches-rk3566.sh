@@ -51,7 +51,7 @@ sudo chroot Arkbuild/ bash -c "sed -i '/\"\~\/.asoundrc\"/s//\"\~\/.asoundrc.med
 sudo mkdir -p Arkbuild/usr/lib/systemd/system-sleep
 sudo cp scripts/sleep.${CHIPSET} Arkbuild/usr/lib/systemd/system-sleep/sleep
 sudo chmod 777 Arkbuild/usr/lib/systemd/system-sleep/sleep
-sudo sed -i "/SuspendState\=/c\SuspendState\=freeze" Arkbuild/etc/systemd/sleep.conf
+sudo sed -i "/SuspendState\=/c\SuspendState\=mem" Arkbuild/etc/systemd/sleep.conf
 
 # Set DRM on boot
 sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/hdmi-test.sh &\") | crontab -"
@@ -261,7 +261,7 @@ sudo cp dnsmasq/dnsmasq.conf Arkbuild/etc/
 sudo cp scripts/sleep_governors.sh Arkbuild/usr/local/bin/
 sudo cp scripts/wasitpng.sh Arkbuild/usr/local/bin/
 sudo cp global/* Arkbuild/usr/local/bin/
-sudo cp device/${CHIPSET}/uboot.img.anbernic Arkbuild/usr/local/bin/
+#sudo cp device/${CHIPSET}/uboot.img.anbernic Arkbuild/usr/local/bin/
 sudo cp scripts/Switch* Arkbuild/usr/local/bin/
 # Disable winbind as connectivity to Active Directory is not needed
 sudo chroot Arkbuild/ bash -c "systemctl disable winbind"
