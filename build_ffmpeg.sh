@@ -49,7 +49,9 @@ fi
 cat <<EOF | sudo tee -a Arkbuild/etc/udev/rules.d/50-mpp-permission.rules
 KERNEL=="mpp_service", MODE="0660", GROUP="video"
 KERNEL=="rga", MODE="0660", GROUP="video"
-KERNEL=="system-dma32", MODE="0666", GROUP="video"
-KERNEL=="system-uncached-dma32", MODE="0666", GROUP="video" RUN+="/usr/bin/chmod a+rw /dev/dma_heap"
+KERNEL=="system", MODE="0660", GROUP="video"
+KERNEL=="system-dma32", MODE="0660", GROUP="video"
+KERNEL=="system-uncached", MODE="0660", GROUP="video"
+KERNEL=="system-uncached-dma32", MODE="0660", GROUP="video"
 EOF
 
