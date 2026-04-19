@@ -23,7 +23,7 @@ cd ..
 
 # Install kernel modules
 sudo make -C $KERNEL_SRC ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=../Arkbuild modules_install
-sudo cp -Rv $KERNEL_SRC/lib/firmware/ ../Arkbuild/usr/lib/
+sudo cp -Rv $KERNEL_SRC/lib/firmware/ Arkbuild/usr/lib/
 
 mountpoint=mnt/boot
 mkdir -p ${mountpoint}
@@ -94,7 +94,8 @@ for bin in /sbin/fsck /sbin/logsave /sbin/e2fsck /sbin/fsck.ext4; do
   fi
 done
 # We also need to copy the 5.10 kernel compatible BT firmware files or BT will not initialize correctly
-sudo cp ../Arkbuild/lib/firmware/rtl_bt/rtl8821cs_* lib/firmware/rtl_bt/
+mkdir -p lib/firmware/rtl_bt/
+sudo cp ../Arkbuild/usr/lib/firmware/rtl_bt/rtl8821cs_* lib/firmware/rtl_bt/
 find . | cpio -H newc -o | gzip -c > ../uInitrd
 sudo mv ../uInitrd ../${mountpoint}/uInitrd
 cd ..
