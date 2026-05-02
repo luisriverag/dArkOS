@@ -135,7 +135,11 @@ fi
 git clone --depth=1 https://github.com/christianhaitian/rk356x-uboot.git
 git clone https://github.com/christianhaitian/rkbin.git
 mkdir -p ./prebuilts/gcc/linux-x86/aarch64/
-ln -s /opt/toolchains/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu ./prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu
+OPT_TOOLCHAIN_DIR="/opt/toolchains/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu"
+LOCAL_TOOLCHAIN_DIR="./prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu"
+if [[ -d "$OPT_TOOLCHAIN_DIR" && ! -d "$LOCAL_TOOLCHAIN_DIR" ]]; then
+    ln -s "$OPT_TOOLCHAIN_DIR" "$LOCAL_TOOLCHAIN_DIR"
+fi
 cd rk356x-uboot
 cp ../resource.img rk3566_tool/Image/
 ./make.sh rk3566
