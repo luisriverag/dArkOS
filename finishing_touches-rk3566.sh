@@ -45,6 +45,7 @@ sudo cp audio/99-hdmi-audio.rules Arkbuild/etc/udev/rules.d/99-hdmi-audio.rules
 sudo cp audio/.asoundrchdmi Arkbuild/home/ark/.asoundrchdmi
 sudo cp audio/.asoundrcbt.${CHIPSET} Arkbuild/home/ark/.asoundrcbt
 sudo cp audio/audio-switch.sh Arkbuild/usr/local/bin/audio-switch.sh
+sudo cp audio/headphone-audio-switch.sh Arkbuild/usr/local/bin/headphone-audio-switch.sh
 sudo chroot Arkbuild/ bash -c "chown ark:ark /home/ark/.asoundrc*"
 sudo chroot Arkbuild/ bash -c "ln -sfv /home/ark/.asoundrc /etc/asound.conf"
 sudo chroot Arkbuild/ bash -c "cp -fv /usr/share/alsa/alsa.conf /usr/share/alsa/alsa.conf.mednafen"
