@@ -14,5 +14,18 @@ done
 
 export DOLPHIN_EMU_USERPATH="${HOME}/.local/share/dolphin-emu/"
 
+if [[ "$(free -m | awk '/^Mem:/{print $2}')" -lt "1900" ]]; then
+  if [[ -z "$(zramctl)" ]]; then
+    printf "Enabling zram.  Please wait...\n" >> /dev/tty1
+    sudo modprobe zram num_devices=1
+    echo lz4 | sudo tee /sys/block/zram0/comp_algorithm
+    echo 1G | sudo tee /sys/block/zram0/disksize
+    sudo mkswap /dev/zram0
+    sudo swapon /dev/zram0 -p 100
+    printf "Launching dolphin emulation now" >> /dev/tty1
+  fi
+fi
+
 LD_PRELOAD=/opt/dolphin/lib/libmali.so /opt/dolphin/dolphin-emu-nogui -p drm -a HLE -e "${1}"
 
+printf "\033c" >> /dev/tty1
