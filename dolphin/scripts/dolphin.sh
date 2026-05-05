@@ -21,7 +21,7 @@ if [[ "$(free -m | awk '/^Mem:/{print $2}')" -lt "1900" ]]; then
     echo lz4 | sudo tee /sys/block/zram0/comp_algorithm
     echo 1G | sudo tee /sys/block/zram0/disksize
     sudo mkswap /dev/zram0
-    sudo swapon /dev/zram0 -p 100
+    sudo swapon /dev/zram0 -p 5
     printf "Launching dolphin emulation now" >> /dev/tty1
   fi
 fi

@@ -27,6 +27,17 @@ if [[ $1 == "standalone" ]] || [[ $1 == "standalone-vulkan" ]]; then
   cp -f $roms_config_directory_std/PSP/SYSTEM/ppsspp.ini.sdl $roms_config_directory_std/PSP/SYSTEM/ppsspp.ini
   if [[ $1 == "standalone-vulkan" ]]; then
    sed -i '/^GraphicsBackend =/c\GraphicsBackend = 3 (VULKAN)' $roms_config_directory_std/PSP/SYSTEM/ppsspp.ini
+   if [[ "$(free -m | awk '/^Mem:/{print $2}')" -lt "1900" ]]; then
+     if [[ -z "$(zramctl)" ]]; then
+       printf "Enabling zram.  Please wait...\n" >> /dev/tty1
+       sudo modprobe zram num_devices=1
+       echo lz4 | sudo tee /sys/block/zram0/comp_algorithm
+       echo 1G | sudo tee /sys/block/zram0/disksize
+       sudo mkswap /dev/zram0
+       sudo swapon /dev/zram0 -p 5
+       printf "Launching ppsspp emulation now" >> /dev/tty1
+     fi
+   fi
   else
    sed -i '/^GraphicsBackend =/c\GraphicsBackend = 0 (OPENGL)' $roms_config_directory_std/PSP/SYSTEM/ppsspp.ini
   fi
