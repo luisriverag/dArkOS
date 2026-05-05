@@ -63,8 +63,8 @@ sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/loca
 # Set performance governor to ondemand on boot
 sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/perfnorm quiet &\") | crontab -"
 
-# Restore screen colors, saturation and such on boot
-#sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/panel_set.sh RestoreSettings &\") | crontab -"
+# Check for connected headphones on boot
+sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/headphone-audio-switch.sh &\") | crontab -"
 
 # Find and record panel id on boot (for rg353 devices only)
 if [[ "$UNIT" == *"353"* ]]; then
