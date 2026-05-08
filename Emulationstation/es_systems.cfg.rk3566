@@ -1179,7 +1179,6 @@
 			<emulator name="standalone">
 				<cores>
 					<core>Normal</core>
-					<core>Stretch</core>
 				</cores>
 			</emulator>
 		</emulators>
